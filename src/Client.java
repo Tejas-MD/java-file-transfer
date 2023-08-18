@@ -18,7 +18,7 @@ public class Client {
                     "Sending the File to the Server");
             // Call SendFile Method
             sendFile(
-                    "C:\\\\Users\\\\home\\\\Downloads\\\\M3-C2.pdf");
+                    "C:\\\\Users\\\\home\\\\Downloads\\\\Module3_MCES_CSE_Ash.pptx");
 
             dataInputStream.close();
             dataInputStream.close();

@@ -25,7 +25,7 @@ public class Server {
                     clientSocket.getOutputStream());
             // Here we call receiveFile define new for that
             // file|
-            receiveFile("M3-C2.pdf");
+            receiveFile("LatestFile.pptx");
 
             dataInputStream.close();
             dataOutputStream.close();
