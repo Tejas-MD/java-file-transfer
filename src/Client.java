@@ -1,25 +1,37 @@
 // UI Libs
+//import javax.swing.JFrame;
+//import javax.swing.JTextField;
+//import javax.swing.JButton;
+//import javax.swing.JLabel;
+//import javax.swing.JPanel;
+//import javax.swing.SwingUtilities;
+//import java.swing.fileChooser;
+//import java.swing.JOptionPanel;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
+
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Dimension;
 
 // Comms libs
 import java.io.*;
 import java.net.Socket;
 
 public class Client extends JFrame {
+
     // UI properties
     private static JTextField serverHostField;
     private static JTextField serverPortField;
     private JButton sendButton;
 //    private JProgressBar progressBar;
-    private JLabel statusLabel;
+//    private JLabel statusLabel;
+
 
     //    Comms properties
     private static DataOutputStream dataOutputStream = null;
-    private static DataInputStream dataInputStream = null;
+//    private static DataInputStream dataInputStream = null;
 
     public static void main(String[] args) {
 
@@ -29,7 +41,7 @@ public class Client extends JFrame {
             ui.setTitle("File Sender");
             ui.setSize(300, 250);
             ui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            ui.initComponents();
+            ui.initComponents(); // initialises components and attaches action function
             ui.setVisible(true);
         });
 
@@ -42,25 +54,41 @@ public class Client extends JFrame {
         serverHostField = new JTextField("localhost", 15);
         serverPortField = new JTextField("900", 15);
         sendButton = new JButton("Send File");
-//        progressBar = new JProgressBar();
-        statusLabel = new JLabel();
+
+        JFileChooser fileChooser = new JFileChooser();
+
 
         sendButton.addActionListener(e -> {
-            try (Socket socket = new Socket("localhost", 900)) {
+            String serverHost = serverHostField.getText();
+            int serverPort = Integer.parseInt(serverPortField.getText());
+            try (Socket socket = new Socket(serverHost, serverPort)) {
 
-                dataInputStream = new DataInputStream(
-                        socket.getInputStream());
+//                dataInputStream = new DataInputStream(
+//                        socket.getInputStream());.
+                int fileChooserResult = fileChooser.showOpenDialog(this);  // Show the file chooser dialog
+
+                String filePath = null;
+                if (fileChooserResult == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();  // Get the selected file
+                    filePath = selectedFile.getAbsolutePath();
+                }
+
                 dataOutputStream = new DataOutputStream(
                         socket.getOutputStream());
                 System.out.println(
                         "Sending the File to the Server");
                 // Call SendFile Method
                 sendFile(
-                        "C:\\\\Users\\\\home\\\\Downloads\\\\Module3_MCES_CSE_Ash.pptx");
+                        filePath);
 
-                dataInputStream.close();
-                dataInputStream.close();
+//                dataInputStream.close();
+                dataOutputStream.close();
+
+                JOptionPane.showMessageDialog(this, "File sent successfully!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+
             } catch (Exception l) {
+                JOptionPane.showMessageDialog(this, "File send failure!", "Error", JOptionPane.ERROR_MESSAGE);
+
                 l.printStackTrace();
             }
         });
@@ -71,11 +99,10 @@ public class Client extends JFrame {
         panel.add(serverHostField);
         panel.add(new JLabel("Server Port:"));
         panel.add(serverPortField);
+        panel.add(new JLabel("Select File:"));
         panel.add(sendButton);
         panel.add(new JLabel());
-//        panel.add(progressBar);
         panel.add(new JLabel());
-        panel.add(statusLabel);
 
         setLayout(new FlowLayout());
         add(panel);

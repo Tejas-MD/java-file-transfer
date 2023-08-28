@@ -6,29 +6,29 @@ import java.net.Socket;
 
 public class Server {
 
-    private static DataOutputStream dataOutputStream = null;
+//    private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
 
     public static void main(String[] args)
     {
         // Here we define Server Socket running on port 900
         try (ServerSocket serverSocket
-                     = new ServerSocket(900)) {
+                     = new ServerSocket(990)) {
             System.out.println(
-                    "Server is Starting in Port 900");
+                    "Server is Starting in Port 990");
             // Accept the Client request using accept method
             Socket clientSocket = serverSocket.accept();
             System.out.println("Connected");
             dataInputStream = new DataInputStream(
                     clientSocket.getInputStream());
-            dataOutputStream = new DataOutputStream(
-                    clientSocket.getOutputStream());
+//            dataOutputStream = new DataOutputStream(
+//                    clientSocket.getOutputStream());
             // Here we call receiveFile define new for that
             // file|
-            receiveFile("LatestFile.pptx");
+            receiveFile("demo.pdf");
 
             dataInputStream.close();
-            dataOutputStream.close();
+//            dataOutputStream.close();
             clientSocket.close();
         }
         catch (Exception e) {
