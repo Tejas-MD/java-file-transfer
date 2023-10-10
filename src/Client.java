@@ -117,6 +117,12 @@ public class Client extends JFrame {
         FileInputStream fileInputStream
                 = new FileInputStream(file);
 
+        // Extract the file type (extension)
+        String fileType = getFileExtension(file);
+
+        // Send the file type to the server
+        dataOutputStream.writeUTF(fileType);
+
         // Here we send the File to Server
         dataOutputStream.writeLong(file.length());
         // Here we  break file into chunks
@@ -130,5 +136,19 @@ public class Client extends JFrame {
         // close the file here
         fileInputStream.close();
     }
+
+
+    // Utility method to get the file extension
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex > 0 && dotIndex < fileName.length() - 1) {
+            return fileName.substring(dotIndex + 1);
+        }
+        return "";
+    }
+
+
+
 }
 

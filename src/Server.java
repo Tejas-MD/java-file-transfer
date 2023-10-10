@@ -19,13 +19,21 @@ public class Server {
             // Accept the Client request using accept method
             Socket clientSocket = serverSocket.accept();
             System.out.println("Connected");
+
             dataInputStream = new DataInputStream(
                     clientSocket.getInputStream());
+
+            // Receive the file type (extension)
+            String fileType = dataInputStream.readUTF();
+
+            // Generate a unique file name based on current timestamp
+            String fileName = System.currentTimeMillis() + "." + fileType;
+
 //            dataOutputStream = new DataOutputStream(
 //                    clientSocket.getOutputStream());
-            // Here we call receiveFile define new for that
-            // file|
-            receiveFile("demo.pdf");
+
+            // Here we call receiveFile define new for that file
+            receiveFile(fileName);
 
             dataInputStream.close();
 //            dataOutputStream.close();
@@ -36,8 +44,7 @@ public class Server {
         }
     }
 
-    // receive file function is start here
-
+    // receive file function starts here
     private static void receiveFile(String fileName)
             throws Exception
     {
