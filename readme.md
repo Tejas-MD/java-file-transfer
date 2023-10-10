@@ -2,9 +2,12 @@
 
 This is a simple file transfer application that allows you to send files from a client to a server using Java Swing and sockets.
 
-## Highlight: Recognises and transmits any file type due to byte buffer TCP transfer. 
+## Highlight
+
+Recognises and transmits any file type due to byte buffer TCP transfer. 
 
 ## Client (Client.java)
+![java file sharing - client ui ](https://github.com/Tejas-MD/java-file-transfer/assets/66009946/cd090d30-631d-4d35-8b28-bec6e456fe49)
 
 ### Overview
 - The `Client` class represents the client-side of the application.
@@ -18,6 +21,7 @@ This is a simple file transfer application that allows you to send files from a 
 4. You will receive a confirmation message upon successful file transfer.
 
 ## Server (Server.java)
+![java file sharing - server UI ](https://github.com/Tejas-MD/java-file-transfer/assets/66009946/ba1da69b-0c37-40e9-82a3-7e238e17e5fa)
 
 ### Overview
 - The `Server` class represents the server-side of the application.
