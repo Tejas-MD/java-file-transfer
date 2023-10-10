@@ -13,7 +13,6 @@ import javax.swing.*;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Dimension;
 
 // Comms libs
 import java.io.*;
@@ -25,8 +24,7 @@ public class Client extends JFrame {
     private static JTextField serverHostField;
     private static JTextField serverPortField;
     private JButton sendButton;
-//    private JProgressBar progressBar;
-//    private JLabel statusLabel;
+
 
 
     //    Comms properties
@@ -87,7 +85,7 @@ public class Client extends JFrame {
                 JOptionPane.showMessageDialog(this, "File sent successfully!", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (Exception l) {
-                JOptionPane.showMessageDialog(this, "File send failure!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "File send failure!\n" + l.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
                 l.printStackTrace();
             }
